@@ -1,0 +1,28 @@
+# Binaries by extension
+*.exe
+*.exe~
+*.a
+*.so
+*.o
+*.obj
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# All sub-level build binaries
+*/**/*
+!*/**/*/
+!*/**/*.*
+
+# Common editor/system specific metadata
+.DS_Store
+.idea/
+.vscode/
+*.iml
+
+# Private files
+.env
+
+# Generated docs
+docs/site/

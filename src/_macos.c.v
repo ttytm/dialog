@@ -11,11 +11,9 @@ fn dialog__file_dialog() ?string {
 }
 
 fn dialog__message(text string, opts MessageOptions) bool {
-	$if macos {
-		w := webview.create()
-		defer {
-			w.destroy()
-		}
+	w := webview.create()
+	defer {
+		w.destroy()
 	}
 	return dialog_c__message(text, opts)
 }

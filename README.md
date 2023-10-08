@@ -16,7 +16,7 @@
       <img alt="Linux File Dialog" src="https://github.com/ttytm/dialog/assets/34311583/6ba6e96b-3581-4382-8074-79918a99dcbd">
     </td>
     <td width="400">
-      <img alt="Windows File Dialog" src="https://github.com/ttytm/dialog/assets/34311583/5cfaff5c-4a82-4e3a-a2cb-d1b5de326d95">
+      <img alt="Windows File Dialog" src="https://github.com/ttytm/dialog/assets/34311583/911e8c71-0cc1-4426-a62c-04714b6b071f">
     </td>
     <td width="400">
       <img alt="macOS File Dialog" src="https://github.com/ttytm/dialog/assets/34311583/f7c4375e-d2e4-4121-ad34-db0473d8fabe">
@@ -36,15 +36,21 @@
   <tr>
     <td width="400">
       <img alt="Linux Color Picker GTK3" src="https://github.com/ttytm/dialog/assets/34311583/8e587c8c-2f12-41ee-9a10-4c3f92e72885">
-      <img alt="Linux Message" src="https://github.com/ttytm/dialog/assets/34311583/c07909aa-20d3-4f1c-9c7e-f0cbee1e5839">
+      <img alt="Linux Message" src="https://github.com/ttytm/dialog/assets/34311583/42e1081b-ee52-4286-abfd-ad9eda63d282">
+      <img alt="Linux Message with Yes and No Buttons" src="https://github.com/ttytm/dialog/assets/34311583/07aa26bd-f887-417b-9c1a-56724ceb2589">
+      <img alt="Linux Input Prompt" src="https://github.com/ttytm/dialog/assets/34311583/bc5e3ec1-88b5-4e1a-b46e-381b322b8a6c">
       <img alt="Linux Color Picker GTK2" src="https://github.com/ttytm/dialog/assets/34311583/37619ed0-8fe2-4e5c-af11-70d7f2304b2b">
     </td>
     <td width="400">
-      <img alt="Windows Color Picker" src="https://github.com/ttytm/dialog/assets/34311583/10a3a3d4-2b0f-4277-ad94-90af40ae4a62">
-      <img alt="Windows Messge" src="https://github.com/ttytm/dialog/assets/34311583/c102876b-75dd-4f1f-b0b0-e0319fdaa4e2">
+      <img alt="Windows Color Picker" src="https://github.com/ttytm/dialog/assets/34311583/966b1395-55ac-45b8-aa1b-516f673b64e8">
+      <img alt="Windows Message" src="https://github.com/ttytm/dialog/assets/34311583/a73e0eaf-e56b-44e6-bcc5-31bb381c6e37">
+      <img alt="Windows Message with Yes and No Buttons" src="https://github.com/ttytm/dialog/assets/34311583/16a1ad65-571e-4183-8c0b-119cbf126aec">
+      <img alt="Windows Input Prompt" src="https://github.com/ttytm/dialog/assets/34311583/54e4a708-de38-44ea-ae61-be39c1bdbff9">
     </td>
     <td width="400">
-      <img alt="macOS Messge" src="https://github.com/ttytm/dialog/assets/34311583/7a217d9a-8e09-4eb6-b369-9e6eb2257ad6">
+      <img alt="macOS Message" src="https://github.com/ttytm/dialog/assets/34311583/15920c46-e529-405f-9731-3ac57ce46449">
+      <img alt="macOS Message with Yes and No Buttons" src="https://github.com/ttytm/dialog/assets/34311583/11cba10b-3190-4114-b1ad-e49e56d4498c">
+      <img alt="macOS Input Prompt" src="https://github.com/ttytm/dialog/assets/34311583/e6d496b4-3c20-4ece-8808-0eba99a59a45">
     </td>
   </tr>
 </table>
@@ -88,8 +94,14 @@ module main
 
 import dialog
 
-selected_choice := dialog.message('Info', buttons: .yes_no)
-dump(selected_choice)
+dialog.message('Thanks for using dialog!')
+
+if !dialog.message('Do you want to continue?', buttons: .yes_no) {
+	dump('Canceled!')
+}
+
+input := dialog.prompt('What is your pets name?')
+dump(input)
 
 selected_file := dialog.file_dialog()
 dump(selected_file)

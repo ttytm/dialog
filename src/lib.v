@@ -42,7 +42,16 @@ pub enum MessageLevel {
 }
 
 // Color represents an RGBA color struct.
-// Example &Color{200, 255, 255, 100}
+// Example:
+// ```v
+// c := Color{
+// 	r: 93
+// 	g: 135
+// 	b: 191
+// 	a: 255
+// }
+// ```
+// Example: color_picker(color: Color{93, 135, 191, 255})
 pub type Color = C.osdialog_color
 
 // file_dialog opens a file dialog and returns the selected path or `none` if the selection was canceled.

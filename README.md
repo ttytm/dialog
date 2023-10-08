@@ -83,7 +83,7 @@ pub fn prompt(message string, opts PromptOptions) ?string
 // file_dialog opens a file dialog and returns the selected path or `none` if the selection was canceled.
 pub fn file_dialog(opts FileDialogOptions) ?string
 
-// open_file opens a file dialog reads the selected path.
+// open_file opens a file dialog and reads the file contents of the selected path.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
 // It returns an error if the selection is cancelled or the reading the file fails.
 pub fn open_file(opts FileOpenOptions) !string

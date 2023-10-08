@@ -88,10 +88,10 @@ pub fn file_dialog(opts FileDialogOptions) ?string
 // It returns an error if the selection is cancelled or the reading the file fails.
 pub fn open_file(opts FileOpenOptions) !string
 
-// open_dir opens a file dialog and returns a list with the paths of the selected directory contents.
+// open_dir opens a file dialog and returns the directory path and a list of the contents of the selected directory.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
 // It returns an error if the selection is cancelled or the reading the directory contents fails.
-pub fn open_dir(opts FileOpenOptions) ![]string
+pub fn open_dir(opts FileOpenOptions) !(string, []string)
 
 // save_file opens a file dialog and saves the given content to the selected path.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.

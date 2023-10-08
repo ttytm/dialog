@@ -99,15 +99,15 @@ pub fn open_file(opts FileOpenOptions) !string {
 	return error('error: no path selected.')
 }
 
-// open_dir opens a file dialog and returns a list with the paths of the selected directory contents.
+// open_dir opens a file dialog and returns the directory path and a list of the contents of the selected directory.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
 // It returns an error if the selection is cancelled or the reading the directory contents fails.
-pub fn open_dir(opts FileOpenOptions) ![]string {
+pub fn open_dir(opts FileOpenOptions) !(string, []string) {
 	if path := dialog__open_dir(opts) {
 		dir_contents := os.ls(path) or {
 			return error('error: failed to read directory contents from "${path}". ${err}')
 		}
-		return dir_contents.map(os.join_path(path, it))
+		return path, dir_contents
 	}
 	return error('error: no path selected.')
 }

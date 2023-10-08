@@ -80,18 +80,24 @@ pub fn message(message string, opts MessageOptions) bool
 // prompt launches an input prompt with an "OK" and "Cancel" button.
 pub fn prompt(message string, opts PromptOptions) ?string
 
-// open_file opens a file dialog and returns the selected path or `none` if the selection was canceled.
-// Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
-pub fn open_file(opts FileOpenOptions) ?string
+// file_dialog opens a file dialog and returns the selected path or `none` if the selection was canceled.
+pub fn file_dialog(opts FileDialogOptions) ?string
 
-// open_dir opens a file dialog and returns the selected directory path or `none` if the selection was canceled.
+// open_file opens a file dialog reads the selected path.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
-pub fn open_dir(opts FileOpenOptions) ?string
+// It returns an error if the selection is cancelled or the reading the file fails.
+pub fn open_file(opts FileOpenOptions) !string
 
-// save_file opens a file dialog for saving and returns the selected path or `none` if the selection was canceled.
-// Optionally, `path` can be specified as the default folder the dialog will attempt to open in, and `filename`
-// to set the default text that will appear in the filename input.
-pub fn save_file(opts FileSaveOptions) ?string
+// open_dir opens a file dialog and returns a list with the paths of the selected directory contents.
+// Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
+// It returns an error if the selection is cancelled or the reading the directory contents fails.
+pub fn open_dir(opts FileOpenOptions) ![]string
+
+// save_file opens a file dialog and saves the given content to the selected path.
+// Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
+// `filename` can be provided to set the default text that will appear in the filename input.
+// It returns an error if the selection is cancelled or the writing the file fails.
+pub fn save_file(opts FileSaveOptions) !
 
 // color_picker opens an RGBA color picker dialog and returns the selected color or `none` if the
 // selection was canceled. Optionally, it takes a `color` and `opacity` argument. `color` sets the
@@ -119,7 +125,7 @@ if !dialog.message('Do you want to continue?', buttons: .yes_no) {
 input := dialog.prompt('What is your pets name?')
 dump(input)
 
-selected_file := dialog.open_file()
+selected_file := dialog.file_dialog()
 dump(selected_file)
 
 selected_color := dialog.color_picker()

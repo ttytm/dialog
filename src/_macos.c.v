@@ -18,13 +18,12 @@ fn dialog__prompt(message string, opts PromptOptions) ?string {
 	return dialog_c__prompt(message, opts)
 }
 
-[deprecated]
-fn dialog__file_dialog() ?string {
+fn dialog__file_dialog(opts FileDialogOptions) ?string {
 	w := webview.create()
 	defer {
 		w.destroy()
 	}
-	return unsafe { dialog_c__file_dialog(.open, nil, nil) }
+	return dialog_c__file_dialog(opts.action, &char(opts.path.str), &char(opts.filename.str))
 }
 
 fn dialog__open_file(opts FileOpenOptions) ?string {

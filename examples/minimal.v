@@ -11,7 +11,7 @@ if !dialog.message('Do you want to continue?', buttons: .yes_no) {
 input := dialog.prompt('What is your pets name?')
 dump(input)
 
-selected_file := dialog.open_file()
+selected_file := dialog.file_dialog()
 dump(selected_file)
 
 selected_color := dialog.color_picker()

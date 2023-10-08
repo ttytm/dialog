@@ -99,7 +99,7 @@ pub fn open_file(opts FileOpenOptions) !string {
 	return error('error: no path selected.')
 }
 
-// open_dir opens a file dialog and returns the directory path and a list of the contents of the selected directory.
+// open_dir opens a file dialog and returns the path of the selected directory and a list of its contents.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
 // It returns an error if the selection is cancelled or the reading the directory contents fails.
 pub fn open_dir(opts FileOpenOptions) !(string, []string) {

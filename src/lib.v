@@ -14,13 +14,13 @@ pub struct MessageOptions {
 [params]
 pub struct PromptOptions {
 	level MessageLevel
-	text  string
+	text  string // is the initial input text.
 }
 
 [params]
 pub struct ColorPickerOptions {
-	color   Color
-	opacity bool = true
+	color   Color // is the initial color.
+	opacity bool = true // can be set to `false` to disable the opacity slider on Linux.
 }
 
 pub enum FileAction {
@@ -41,6 +41,8 @@ pub enum MessageLevel {
 	error
 }
 
+// Color represents an RGBA color struct.
+// Example &Color{200, 255, 255, 100}
 pub type Color = C.osdialog_color
 
 // file_dialog opens a file dialog and returns the selected path or `none` if the selection was canceled.

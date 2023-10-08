@@ -65,27 +65,6 @@ pub enum MessageLevel {
 // Example: color_picker(color: Color{93, 135, 191, 255})
 pub type Color = C.osdialog_color
 
-// file_dialog opens a file dialog and returns the selected path or `none` if the selection was canceled.
-[deprecated: 'will be removed with v0.3; use `open_file()` instead.']
-pub fn file_dialog() ?string {
-	return dialog__file_dialog()
-}
-
-// open_file opens a file dialog and returns the selected path or `none` if the selection was canceled.
-pub fn open_file(opts FileOpenOptions) ?string {
-	return dialog__open_file(opts)
-}
-
-// open_dir opens a file dialog and returns the selected directory path or `none` if the selection was canceled.
-pub fn open_dir(opts FileOpenOptions) ?string {
-	return dialog__open_dir(opts)
-}
-
-// save_file opens a file dialog for saving and returns the selected path or `none` if the selection was canceled.
-pub fn save_file(opts FileSaveOptions) ?string {
-	return dialog__save_file(opts)
-}
-
 // message launches a message box and returns `true` if `OK` or `Yes` was pressed.
 pub fn message(message string, opts MessageOptions) bool {
 	return dialog__message(message, opts)
@@ -94,6 +73,31 @@ pub fn message(message string, opts MessageOptions) bool {
 // prompt launches an input prompt with an "OK" and "Cancel" button.
 pub fn prompt(message string, opts PromptOptions) ?string {
 	return dialog__prompt(message, opts)
+}
+
+// file_dialog opens a file dialog and returns the selected path or `none` if the selection was canceled.
+[deprecated: 'will be removed with v0.3; use `open_file()` instead.']
+pub fn file_dialog() ?string {
+	return dialog__file_dialog()
+}
+
+// open_file opens a file dialog and returns the selected path or `none` if the selection was canceled.
+// Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
+pub fn open_file(opts FileOpenOptions) ?string {
+	return dialog__open_file(opts)
+}
+
+// open_dir opens a file dialog and returns the selected directory path or `none` if the selection was canceled.
+// Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
+pub fn open_dir(opts FileOpenOptions) ?string {
+	return dialog__open_dir(opts)
+}
+
+// save_file opens a file dialog for saving and returns the selected path or `none` if the selection was canceled.
+// Optionally, `path` can be specified as the default folder the dialog will attempt to open in, and `filename`
+// to set the default text that will appear in the filename input.
+pub fn save_file(opts FileSaveOptions) ?string {
+	return dialog__save_file(opts)
 }
 
 // color_picker opens an RGBA color picker dialog and returns the selected color or `none` if the

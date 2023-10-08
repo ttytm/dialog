@@ -74,14 +74,24 @@ v install --git https://github.com/ttytm/webview
 ## Usage
 
 ```v ignore
-// file_dialog opens a file dialog and returns the selected path or `none` if the selection was canceled.
-pub fn file_dialog() ?string
-
 // message launches a message box and returns `true` if `OK` or `Yes` was pressed.
-pub fn message(text string, opts MessageOptions) bool
+pub fn message(message string, opts MessageOptions) bool
 
 // prompt launches an input prompt with an "OK" and "Cancel" button.
 pub fn prompt(message string, opts PromptOptions) ?string
+
+// open_file opens a file dialog and returns the selected path or `none` if the selection was canceled.
+// Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
+pub fn open_file(opts FileOpenOptions) ?string
+
+// open_dir opens a file dialog and returns the selected directory path or `none` if the selection was canceled.
+// Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
+pub fn open_dir(opts FileOpenOptions) ?string
+
+// save_file opens a file dialog for saving and returns the selected path or `none` if the selection was canceled.
+// Optionally, `path` can be specified as the default folder the dialog will attempt to open in, and `filename`
+// to set the default text that will appear in the filename input.
+pub fn save_file(opts FileSaveOptions) ?string
 
 // color_picker opens an RGBA color picker dialog and returns the selected color or `none` if the
 // selection was canceled. Optionally, it takes a `color` and `opacity` argument. `color` sets the
@@ -109,7 +119,7 @@ if !dialog.message('Do you want to continue?', buttons: .yes_no) {
 input := dialog.prompt('What is your pets name?')
 dump(input)
 
-selected_file := dialog.file_dialog()
+selected_file := dialog.open_file()
 dump(selected_file)
 
 selected_color := dialog.color_picker()

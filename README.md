@@ -86,9 +86,12 @@ pub fn prompt(message string, opts PromptOptions) ?string
 // color_picker opens an RGBA color picker dialog and returns the selected color or `none` if the
 // selection was canceled. Optionally, it takes a `color` and `opacity` argument. `color` sets the
 // dialogs initial color. On Linux, `opacity` can be set to `false` to disable the opacity slider.
-// TODO: macOS support
 pub fn color_picker(opts ColorPickerOptions) ?Color
 ```
+
+> **Note**
+> v doc provides an overview of all public definitions. \
+> Use `v doc -comments dialog.src` in the terminal, or check out the module's [doc pages](https://ttytm.github.io/dialog/dialog.html) in the browser.
 
 ### Example
 

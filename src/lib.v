@@ -18,6 +18,17 @@ pub struct PromptOptions {
 }
 
 [params]
+pub struct FileOpenOptions {
+	path string // is the default folder the dialog will attempt to open in.
+}
+
+[params]
+pub struct FileSaveOptions {
+	path     string // is the default folder the dialog will attempt to open in.
+	filename string // is the default text that will appear in the filename input.
+}
+
+[params]
 pub struct ColorPickerOptions {
 	color   Color // is the initial color.
 	opacity bool = true // can be set to `false` to disable the opacity slider on Linux.
@@ -55,9 +66,24 @@ pub enum MessageLevel {
 pub type Color = C.osdialog_color
 
 // file_dialog opens a file dialog and returns the selected path or `none` if the selection was canceled.
-// TODO: file_dialog params struct
+[deprecated: 'will be removed with v0.3; use `open_file()` instead.']
 pub fn file_dialog() ?string {
 	return dialog__file_dialog()
+}
+
+// open_file opens a file dialog and returns the selected path or `none` if the selection was canceled.
+pub fn open_file(opts FileOpenOptions) ?string {
+	return dialog__open_file(opts)
+}
+
+// open_dir opens a file dialog and returns the selected directory path or `none` if the selection was canceled.
+pub fn open_dir(opts FileOpenOptions) ?string {
+	return dialog__open_dir(opts)
+}
+
+// save_file opens a file dialog for saving and returns the selected path or `none` if the selection was canceled.
+pub fn save_file(opts FileSaveOptions) ?string {
+	return dialog__save_file(opts)
 }
 
 // message launches a message box and returns `true` if `OK` or `Yes` was pressed.

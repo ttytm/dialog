@@ -30,11 +30,11 @@ fn C.osdialog_prompt(level int, message &char, text &char) &char
 fn C.osdialog_file(action int, path &char, filename &char, filters C.osdialog_filters) &char
 fn C.osdialog_color_picker(color &C.osdialog_color, opacity int) int
 
-fn dialog_c__file_dialog() ?string {
-	path := C.osdialog_file(int(FileAction.open), unsafe { nil }, unsafe { nil }, unsafe { nil })
+fn dialog_c__file_dialog(action FileAction, path &char, filename &char) ?string {
+	selected := C.osdialog_file(int(action), path, filename, unsafe { nil })
 	unsafe {
-		if path != nil {
-			return path.vstring()
+		if selected != nil {
+			return selected.vstring()
 		}
 	}
 	return none

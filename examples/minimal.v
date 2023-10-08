@@ -2,8 +2,14 @@ module main
 
 import dialog
 
-selected_choice := dialog.message('Info', buttons: .yes_no)
-dump(selected_choice)
+dialog.message('Thanks for using dialog!')
+
+if !dialog.message('Do you want to continue?', buttons: .yes_no) {
+	dump('Canceled!')
+}
+
+input := dialog.prompt('What is your pets name?')
+dump(input)
 
 selected_file := dialog.file_dialog()
 dump(selected_file)

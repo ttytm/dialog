@@ -1,9 +1,20 @@
+// dialog
+//
+// A cross-platform utility library to open system dialogs - open files, message boxes, color-pickers etc.
+// License: MIT
+// Source: https://github.com/ttytm/dialog
 module dialog
 
 [params]
 pub struct MessageOptions {
 	level   MessageLevel
 	buttons MessageButtons
+}
+
+[params]
+pub struct PromptOptions {
+	level MessageLevel
+	text  string
 }
 
 [params]
@@ -39,8 +50,13 @@ pub fn file_dialog() ?string {
 }
 
 // message launches a message box and returns `true` if `OK` or `Yes` was pressed.
-pub fn message(text string, opts MessageOptions) bool {
-	return dialog__message(text, opts)
+pub fn message(message string, opts MessageOptions) bool {
+	return dialog__message(message, opts)
+}
+
+// prompt launches an input prompt with an "OK" and "Cancel" button.
+pub fn prompt(message string, opts PromptOptions) ?string {
+	return dialog__prompt(message, opts)
 }
 
 // color_picker opens an RGBA color picker dialog and returns the selected color or `none` if the

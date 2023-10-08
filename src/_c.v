@@ -26,6 +26,7 @@ struct C.osdialog_color {
 }
 
 fn C.osdialog_message(level int, buttons int, message &char) int
+fn C.osdialog_prompt(level int, message &char, text &char) &char
 fn C.osdialog_file(action int, path &char, filename &char, filters C.osdialog_filters) &char
 fn C.osdialog_color_picker(color &C.osdialog_color, opacity int) int
 
@@ -39,12 +40,22 @@ fn dialog_c__file_dialog() ?string {
 	return none
 }
 
-fn dialog_c__message(text string, opts MessageOptions) bool {
-	return if C.osdialog_message(int(opts.level), int(opts.buttons), &char(text.str)) == 1 {
+fn dialog_c__message(message string, opts MessageOptions) bool {
+	return if C.osdialog_message(int(opts.level), int(opts.buttons), &char(message.str)) == 1 {
 		true
 	} else {
 		false
 	}
+}
+
+fn dialog_c__prompt(message string, opts PromptOptions) ?string {
+	input := C.osdialog_prompt(int(opts.level), &char(message.str), &char(opts.text.str))
+	unsafe {
+		if input != nil {
+			return input.vstring()
+		}
+	}
+	return none
 }
 
 fn dialog_c__color_picker(opts ColorPickerOptions) ?Color {

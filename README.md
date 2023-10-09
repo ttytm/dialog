@@ -107,7 +107,7 @@ pub fn color_picker(opts ColorPickerOptions) ?Color
 
 > **Note**
 > v doc provides an overview of all public definitions. \
-> Use `v doc -comments dialog.src` in the terminal, or check out the module's [doc pages](https://ttytm.github.io/dialog/dialog.html) in the browser.
+> Use `v doc -comments dialog.src` in the terminal, or refer to the module's [doc pages](https://ttytm.github.io/dialog/dialog.html) in the browser.
 
 ### Example
 

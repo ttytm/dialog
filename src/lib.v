@@ -43,12 +43,6 @@ pub struct ColorPickerOptions {
 	opacity bool = true // can be set to `false` to disable the opacity slider on Linux.
 }
 
-pub enum FileAction {
-	open
-	open_dir
-	save
-}
-
 pub enum MessageButtons {
 	ok
 	ok_cancel
@@ -59,6 +53,12 @@ pub enum MessageLevel {
 	info
 	warning
 	error
+}
+
+pub enum FileAction {
+	open
+	open_dir
+	save
 }
 
 // Color represents an RGBA color struct.

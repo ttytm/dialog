@@ -91,7 +91,7 @@ pub fn file_dialog(opts FileDialogOptions) ?string {
 
 // open_file opens a file dialog and reads the file contents of the selected path.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
-// It returns an error if the selection is cancelled or the reading // the file fails.
+// It returns an error if the selection was cancelled or the reading the file fails.
 pub fn open_file(opts FileOpenOptions) !string {
 	if path := dialog__open_file(opts) {
 		return os.read_file(path) or { error('error: failed to read file from "${path}". ${err}') }
@@ -101,7 +101,7 @@ pub fn open_file(opts FileOpenOptions) !string {
 
 // open_dir opens a file dialog and returns the path of the selected directory and a list of its contents.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
-// It returns an error if the selection is cancelled or the reading the directory contents fails.
+// It returns an error if the selection was cancelled or the reading the directory contents fails.
 pub fn open_dir(opts FileOpenOptions) !(string, []string) {
 	if path := dialog__open_dir(opts) {
 		dir_contents := os.ls(path) or {
@@ -115,7 +115,7 @@ pub fn open_dir(opts FileOpenOptions) !(string, []string) {
 // save_file opens a file dialog and saves the given content to the selected path.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
 // `filename` can be provided to set the default text that will appear in the filename input.
-// It returns an error if the selection is cancelled or the writing the file fails.
+// It returns an error if the selection was cancelled or the writing the file fails.
 pub fn save_file(content string, opts FileSaveOptions) ! {
 	if path := dialog__save_file(opts) {
 		os.write_file(path, content) or {
@@ -127,7 +127,7 @@ pub fn save_file(content string, opts FileSaveOptions) ! {
 
 // color_picker opens an RGBA color picker dialog and returns the selected color or `none` if the
 // selection was canceled. Optionally, it takes a `color` and `opacity` argument. `color` sets the
-// dialogs initial color. On Linux, `opacity` can be set to `false` to disable the opacity slider.
+// dialogs initial color. `opacity` can be set to `false` to disable the opacity slider on Linux.
 // TODO: macOS support
 pub fn color_picker(opts ColorPickerOptions) ?Color {
 	return dialog__color_picker(opts)

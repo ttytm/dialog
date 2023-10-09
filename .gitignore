@@ -25,4 +25,5 @@
 .env
 
 # Generated docs
+_docs/
 docs/site/

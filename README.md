@@ -85,18 +85,18 @@ pub fn file_dialog(opts FileDialogOptions) ?string
 
 // open_file opens a file dialog and reads the file contents of the selected path.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
-// It returns an error if the selection was cancelled or the reading the file fails.
+// It returns an error if the selection was cancelled or if reading the file fails.
 pub fn open_file(opts FileOpenOptions) !string
 
 // open_dir opens a file dialog and returns the path of the selected directory and a list of its contents.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
-// It returns an error if the selection was cancelled or the reading the directory contents fails.
+// It returns an error if the selection was cancelled or if reading the directory contents fails.
 pub fn open_dir(opts FileOpenOptions) !(string, []string)
 
 // save_file opens a file dialog and saves the given content to the selected path.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
 // `filename` can be provided to set the default text that will appear in the filename input.
-// It returns an error if the selection was cancelled or the writing the file fails.
+// It returns an error if the selection was canceled or if writing the file fails.
 pub fn save_file(opts FileSaveOptions) !
 
 // color_picker opens an RGBA color picker dialog and returns the selected color or `none` if the

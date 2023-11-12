@@ -89,10 +89,20 @@ pub fn file_dialog(opts FileDialogOptions) ?string {
 	return dialog__file_dialog(opts)
 }
 
-// open_file opens a file dialog and reads the file contents of the selected path.
+// open_file opens a file dialog and returns the `os.File` of the selected file.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
 // It returns an error if the selection was cancelled or if reading the file fails.
-pub fn open_file(opts FileOpenOptions) !string {
+pub fn open_file(opts FileOpenOptions) !os.File {
+	if path := dialog__open_file(opts) {
+		return os.open(path) or { error('error: failed to open file from "${path}". ${err}') }
+	}
+	return error('error: no path selected.')
+}
+
+// read_file opens a file dialog and reads the file contents of the selected file.
+// Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
+// It returns an error if the selection was cancelled or if reading the file fails.
+pub fn read_file(opts FileOpenOptions) !string {
 	if path := dialog__open_file(opts) {
 		return os.read_file(path) or { error('error: failed to read file from "${path}". ${err}') }
 	}

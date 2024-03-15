@@ -7,37 +7,37 @@ module dialog
 
 import os
 
-[params]
+@[params]
 pub struct MessageOptions {
 	level   MessageLevel
 	buttons MessageButtons
 }
 
-[params]
+@[params]
 pub struct PromptOptions {
 	level MessageLevel
 	text  string // is the initial input text.
 }
 
-[params]
+@[params]
 pub struct FileDialogOptions {
 	action   FileAction
 	path     string // is the default folder the dialog will attempt to open in.
 	filename string // is the default text that will appear in the filename input. Only when the action is `.save`.
 }
 
-[params]
+@[params]
 pub struct FileOpenOptions {
 	path string // is the default folder the dialog will attempt to open in.
 }
 
-[params]
+@[params]
 pub struct FileSaveOptions {
 	path     string // is the default folder the dialog will attempt to open in.
 	filename string // is the default text that will appear in the filename input.
 }
 
-[params]
+@[params]
 pub struct ColorPickerOptions {
 	color   Color // is the initial color.
 	opacity bool = true // can be set to `false` to disable the opacity slider on Linux.

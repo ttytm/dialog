@@ -17,7 +17,7 @@ $if macos {
 	#pkgconfig gtk+-3.0
 }
 
-[typedef]
+@[typedef]
 struct C.osdialog_color {
 	r u8
 	g u8

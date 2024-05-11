@@ -9,18 +9,21 @@ import os
 
 @[params]
 pub struct MessageOptions {
+pub:
 	level   MessageLevel
 	buttons MessageButtons
 }
 
 @[params]
 pub struct PromptOptions {
+pub:
 	level MessageLevel
 	text  string // is the initial input text.
 }
 
 @[params]
 pub struct FileDialogOptions {
+pub:
 	action   FileAction
 	path     string // is the default folder the dialog will attempt to open in.
 	filename string // is the default text that will appear in the filename input. Only when the action is `.save`.
@@ -28,17 +31,20 @@ pub struct FileDialogOptions {
 
 @[params]
 pub struct FileOpenOptions {
+pub:
 	path string // is the default folder the dialog will attempt to open in.
 }
 
 @[params]
 pub struct FileSaveOptions {
+pub:
 	path     string // is the default folder the dialog will attempt to open in.
 	filename string // is the default text that will appear in the filename input.
 }
 
 @[params]
 pub struct ColorPickerOptions {
+pub:
 	color   Color // is the initial color.
 	opacity bool = true // can be set to `false` to disable the opacity slider on Linux.
 }

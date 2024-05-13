@@ -60,14 +60,14 @@
 ## Installation
 
 ```sh
-v install --git https://github.com/ttytm/dialog
+v install https://github.com/ttytm/dialog
 ```
 
 On macOS, `dialog` currently uses V webview to ensure it can interop with system windows.
 
 ```sh
 # macOS only dependency
-v install --git https://github.com/ttytm/webview
+v install https://github.com/ttytm/webview
 ~/.vmodules/webview/build.vsh
 ```
 

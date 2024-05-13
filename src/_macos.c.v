@@ -51,5 +51,13 @@ fn dialog__save_file(opts FileSaveOptions) ?string {
 }
 
 fn dialog__color_picker(opts ColorPickerOptions) ?Color {
+	w := webview.create()
+	defer {
+		w.destroy()
+	}
+	color := &opts.color
+	if C.osdialog_color_picker(color, int(opts.opacity)) == 1 {
+		return *color
+	}
 	return none
 }

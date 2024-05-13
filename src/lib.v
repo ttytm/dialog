@@ -144,7 +144,6 @@ pub fn save_file(content string, opts FileSaveOptions) ! {
 // color_picker opens an RGBA color picker dialog and returns the selected color or `none` if the
 // selection was canceled. Optionally, it takes a `color` and `opacity` argument. `color` sets the
 // dialogs initial color. `opacity` can be set to `false` to disable the opacity slider on Linux.
-// TODO: macOS support
 pub fn color_picker(opts ColorPickerOptions) ?Color {
 	return dialog__color_picker(opts)
 }

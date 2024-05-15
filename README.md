@@ -110,7 +110,7 @@ pub fn save_file(opts FileSaveOptions) !
 pub fn color_picker(opts ColorPickerOptions) ?Color
 ```
 
-> **Note**
+> [!NOTE]
 > v doc provides an overview of all public definitions. \
 > Use `v doc -comments dialog.src` in the terminal, or refer to the module's [doc pages](https://ttytm.github.io/dialog/dialog.html) in the browser.
 
@@ -141,7 +141,7 @@ dump(selected_color)
 v run examples/minimal.v
 ```
 
-> **Note**
+> [!TIP]
 > When running and building on Windows, it is recommended to use `gcc` for compilation. E.g.:
 >
 > ```sh

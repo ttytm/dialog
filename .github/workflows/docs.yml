@@ -1,47 +1,48 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy docs to GitHub Pages
+name: Docs
 
 on:
-  # Runs on pushes targeting the default branch and docs path
   push:
-    branches: ['main']
-  # Allows you to run this workflow manually from the Actions tab
+    paths-ignore: ['**.yml', '!.github/workflows/docs.yml']
+  pull_request:
+    paths-ignore: ['**.yml', '!.github/workflows/docs.yml']
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: 'pages'
-  cancel-in-progress: false
-
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref_name == 'main' && github.sha || github.ref }}
+      cancel-in-progress: true
     steps:
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Install V
-        uses: vlang/setup-v@v1.3
-        with:
-          check-latest: true
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Setup V
+        run: |
+          curl -Lo v_linux.zip https://github.com/vlang/v/releases/latest/download/v_linux.zip
+          unzip -o v_linux.zip
+          mv v ~/v && ~/v/v symlink
       - name: Build docs
         run: docs/build.vsh
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        if: github.event_name == 'push' && github.ref_name == 'main' && github.repository == 'ttytm/dialog'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'docs/site'
-      - name: Deploy to GitHub Pages
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref_name == 'main' && github.repository == 'ttytm/dialog'
+    needs: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: ${{ github.ref_name != 'main' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4

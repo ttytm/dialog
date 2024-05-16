@@ -6,11 +6,13 @@ on:
   pull_request:
     paths-ignore: ['**/*.md']
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name == 'main' && github.sha || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   linux:
     uses: ./.github/workflows/linux.yml
-    permissions:
-      contents: write
 
   macos:
     uses: ./.github/workflows/macos.yml

@@ -3,19 +3,15 @@ module dialog
 #flag @VMODROOT/src/osdialog/osdialog.c
 #flag darwin @VMODROOT/src/osdialog/osdialog_mac.m -framework AppKit
 #flag windows @VMODROOT/src/osdialog/osdialog_win.c -lcomdlg32
-$if gtk2 ? {
-	#flag linux @VMODROOT/src/osdialog/osdialog_gtk2.c
-} $else {
-	#flag linux @VMODROOT/src/osdialog/osdialog_gtk3.c
+#flag linux @VMODROOT/src/osdialog/osdialog_gtk2.c
+$if linux {
+	$if !gtk2 ? {
+		#flag -DOSDIALOG_GTK3
+	}
+	#pkgconfig gtk+-3.0
 }
 
 #include "@VMODROOT/src/osdialog/osdialog.h"
-
-$if macos {
-	#include <AppKit/AppKit.h>
-} $else $if linux {
-	#pkgconfig gtk+-3.0
-}
 
 @[typedef]
 struct C.osdialog_color {

@@ -99,33 +99,27 @@ pub fn file_dialog(opts FileDialogOptions) ?string {
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
 // It returns an error if the selection was cancelled or if reading the file fails.
 pub fn open_file(opts FileOpenOptions) !os.File {
-	if path := dialog__open_file(opts) {
-		return os.open(path) or { error('error: failed to open file from "${path}". ${err}') }
-	}
-	return error('error: no path selected.')
+	path := dialog__open_file(opts) or { return error('error: no path selected.') }
+	return os.open(path) or { error('error: failed to open file from "${path}". ${err}') }
 }
 
 // read_file opens a file dialog and reads the file contents of the selected file.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
 // It returns an error if the selection was cancelled or if reading the file fails.
 pub fn read_file(opts FileOpenOptions) !string {
-	if path := dialog__open_file(opts) {
-		return os.read_file(path) or { error('error: failed to read file from "${path}". ${err}') }
-	}
-	return error('error: no path selected.')
+	path := dialog__open_file(opts) or { return error('error: no path selected.') }
+	return os.read_file(path) or { error('error: failed to read file from "${path}". ${err}') }
 }
 
 // open_dir opens a file dialog and returns the path of the selected directory and a list of its contents.
 // Optionally, `path` can be specified as the default folder the dialog will attempt to open in.
 // It returns an error if the selection was cancelled or if reading the directory contents fails.
 pub fn open_dir(opts FileOpenOptions) !(string, []string) {
-	if path := dialog__open_dir(opts) {
-		dir_contents := os.ls(path) or {
-			return error('error: failed to read directory contents from "${path}". ${err}')
-		}
-		return path, dir_contents
+	path := dialog__open_dir(opts) or { return error('error: no path selected.') }
+	dir_contents := os.ls(path) or {
+		return error('error: failed to read directory contents from "${path}". ${err}')
 	}
-	return error('error: no path selected.')
+	return path, dir_contents
 }
 
 // save_file opens a file dialog and saves the given content to the selected path.
@@ -133,12 +127,10 @@ pub fn open_dir(opts FileOpenOptions) !(string, []string) {
 // `filename` can be provided to set the default text that will appear in the filename input.
 // It returns an error if the selection was canceled or if writing the file fails.
 pub fn save_file(content string, opts FileSaveOptions) ! {
-	if path := dialog__save_file(opts) {
-		os.write_file(path, content) or {
-			return error('error: failed to save file to "${path}". ${err}')
-		}
+	path := dialog__save_file(opts) or { return error('error: no path selected.') }
+	os.write_file(path, content) or {
+		return error('error: failed to save file to "${path}". ${err}')
 	}
-	return error('error: no path selected.')
 }
 
 // color_picker opens an RGBA color picker dialog and returns the selected color or `none` if the

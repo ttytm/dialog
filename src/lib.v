@@ -6,6 +6,7 @@
 module dialog
 
 import os
+import rand
 
 @[params]
 pub struct MessageOptions {
@@ -45,7 +46,12 @@ pub:
 @[params]
 pub struct ColorPickerOptions {
 pub:
-	color   Color // is the initial color.
+	color Color = Color{ // is the initial color.
+		r: rand.u8()
+		g: rand.u8()
+		b: rand.u8()
+		a: 255
+	}
 	opacity bool = true // can be set to `false` to disable the opacity slider on Linux.
 }
 

@@ -33,11 +33,7 @@ fn dialog__message(message string, opts MessageOptions) bool {
 			destroy(app)
 		}
 	}
-	return if C.osdialog_message(int(opts.level), int(opts.buttons), &char(message.str)) == 1 {
-		true
-	} else {
-		false
-	}
+	return C.osdialog_message(int(opts.level), int(opts.buttons), &char(message.str)) == 1
 }
 
 fn dialog__prompt(message string, opts PromptOptions) ?string {
